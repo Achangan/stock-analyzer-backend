@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: quote-service
+          uri: lb://quote-service
+          predicates:
+            - Path=/api/quote/**
+          filters:
+            - StripPrefix=2
+        - id: analysis-service
+          uri: lb://analysis-service
+          predicates:
+            - Path=/api/analysis/**
+          filters:
+            - StripPrefix=2
+        - id: report-service
+          uri: lb://report-service
+          predicates:
+            - Path=/api/report/**
+          filters:
+            - StripPrefix=2
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "**"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+
+logging:
+  level:
+    com.stockanalyzer: info
+    org.springframework.cloud.gateway: info

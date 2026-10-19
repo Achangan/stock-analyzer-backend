@@ -1,0 +1,6 @@
+D:\stock-analyzer\analysis-service\src\main\java\com\stockanalyzer\analysis\AnalysisServiceApplication.java
+D:\stock-analyzer\analysis-service\src\main\java\com\stockanalyzer\analysis\model\IndexSummary.java
+D:\stock-analyzer\analysis-service\src\main\java\com\stockanalyzer\analysis\model\IndexDaily.java
+D:\stock-analyzer\analysis-service\src\main\java\com\stockanalyzer\analysis\feign\QuoteFeignClient.java
+D:\stock-analyzer\analysis-service\src\main\java\com\stockanalyzer\analysis\controller\AnalysisController.java
+D:\stock-analyzer\analysis-service\src\main\java\com\stockanalyzer\analysis\service\IndexAnalysisService.java

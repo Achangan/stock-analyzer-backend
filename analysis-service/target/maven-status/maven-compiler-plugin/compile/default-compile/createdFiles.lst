@@ -1,0 +1,6 @@
+com\stockanalyzer\analysis\feign\QuoteFeignClient.class
+com\stockanalyzer\analysis\model\IndexSummary.class
+com\stockanalyzer\analysis\AnalysisServiceApplication.class
+com\stockanalyzer\analysis\service\IndexAnalysisService.class
+com\stockanalyzer\analysis\model\IndexDaily.class
+com\stockanalyzer\analysis\controller\AnalysisController.class

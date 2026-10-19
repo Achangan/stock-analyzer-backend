@@ -1,0 +1,4 @@
+com\stockanalyzer\report\service\ReportService.class
+com\stockanalyzer\report\feign\AnalysisFeignClient.class
+com\stockanalyzer\report\controller\ReportController.class
+com\stockanalyzer\report\ReportServiceApplication.class

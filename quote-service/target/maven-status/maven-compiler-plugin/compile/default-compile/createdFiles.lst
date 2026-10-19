@@ -1,0 +1,6 @@
+com\stockanalyzer\quote\dao\QuoteDao$IndexCoverage.class
+com\stockanalyzer\quote\QuoteServiceApplication.class
+com\stockanalyzer\quote\dao\QuoteDao.class
+com\stockanalyzer\quote\model\IndexDaily.class
+com\stockanalyzer\quote\controller\QuoteController.class
+com\stockanalyzer\quote\model\IndexSummary.class
