@@ -25,7 +25,8 @@ public class ReportController {
     /** 生成当日报告 */
     @PostMapping("/daily")
     public Map<String, String> generateDaily() {
-        List<String> defaultIndexes = Arrays.asList("000300.SH", "000905.SH", "000001.SH", "399006.SZ");
+        List<String> defaultIndexes = Arrays.asList(
+                "000300.SH", "000905.SH", "000001.SH", "399006.SZ", "000688.SH");
         String report = reportService.generateDailyReport(defaultIndexes);
         Map<String, String> result = new HashMap<>();
         result.put("report", report);
