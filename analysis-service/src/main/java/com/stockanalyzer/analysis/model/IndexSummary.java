@@ -13,6 +13,10 @@ public class IndexSummary {
     private Double change20d;
     private Double change60d;
     private Double volatility20d;
+    private Boolean ma5OverMa20;
+    private Boolean ma20OverMa60;
+    private String trend;
+    private Double bias20;
 
     public String getTsCode() {
         return tsCode;
@@ -92,5 +96,37 @@ public class IndexSummary {
 
     public void setVolatility20d(Double volatility20d) {
         this.volatility20d = volatility20d;
+    }
+
+    public Boolean getMa5OverMa20() {
+        return ma5OverMa20;
+    }
+
+    public void setMa5OverMa20(Boolean ma5OverMa20) {
+        this.ma5OverMa20 = ma5OverMa20;
+    }
+
+    public Boolean getMa20OverMa60() {
+        return ma20OverMa60;
+    }
+
+    public void setMa20OverMa60(Boolean ma20OverMa60) {
+        this.ma20OverMa60 = ma20OverMa60;
+    }
+
+    public String getTrend() {
+        return trend;
+    }
+
+    public void setTrend(String trend) {
+        this.trend = trend;
+    }
+
+    public Double getBias20() {
+        return bias20;
+    }
+
+    public void setBias20(Double bias20) {
+        this.bias20 = bias20;
     }
 }

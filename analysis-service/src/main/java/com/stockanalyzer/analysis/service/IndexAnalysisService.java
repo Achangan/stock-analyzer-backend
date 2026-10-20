@@ -46,7 +46,33 @@ public class IndexAnalysisService {
         s.setChange20d(changeOver(rows, MA20_WINDOW));
         s.setChange60d(changeOver(rows, MA60_WINDOW));
         s.setVolatility20d(annualizedVolatility(rows, MA20_WINDOW));
+
+        // 均线关系与趋势形态
+        if (s.getMa5() != null && s.getMa20() != null) {
+            s.setMa5OverMa20(s.getMa5() > s.getMa20());
+        }
+        if (s.getMa20() != null && s.getMa60() != null) {
+            s.setMa20OverMa60(s.getMa20() > s.getMa60());
+        }
+        s.setTrend(trend(s.getMa5(), s.getMa20(), s.getMa60()));
+        if (s.getMa20() != null && s.getMa20() != 0.0) {
+            s.setBias20(round2((s.getLatestClose() / s.getMa20() - 1) * 100));
+        }
         return s;
+    }
+
+    /** 趋势形态：MA5 > MA20 > MA60 为多头排列，反之空头排列，其余震荡 */
+    private String trend(Double ma5, Double ma20, Double ma60) {
+        if (ma5 == null || ma20 == null || ma60 == null) {
+            return null;
+        }
+        if (ma5 > ma20 && ma20 > ma60) {
+            return "多头排列";
+        }
+        if (ma5 < ma20 && ma20 < ma60) {
+            return "空头排列";
+        }
+        return "震荡";
     }
 
     /** N 日均线：rows 按日期降序，取前 N 个 close 的均值；数据不足返回 null */

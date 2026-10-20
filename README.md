@@ -39,8 +39,8 @@ A股每日自动分析引擎后端，基于 Spring Cloud 微服务架构。
 | 服务 | 端口 | 职责 |
 |------|------|------|
 | gateway-service | 8080 | API 网关，路由转发，CORS |
-| quote-service | 8081 | 行情数据服务，指数列表、历史数据查询 |
-| analysis-service | 8082 | 分析服务，均线、涨跌幅、波动率计算 |
+| quote-service | 8081 | 行情数据服务，指数列表、区间/最近日线（含 OHLC、成交量、成交额）、数据覆盖度 |
+| analysis-service | 8082 | 分析服务，均线、涨跌幅、波动率、均线排列趋势与 MA20 乖离计算 |
 | report-service | 8083 | 报告生成服务，Markdown 格式每日报告 |
 
 ## 快速启动
@@ -104,9 +104,15 @@ python run_daily.py
 | 接口 | 方法 | 说明 |
 |------|------|------|
 | `/api/quote/index/list` | GET | 指数列表 |
-| `/api/quote/index/{code}/recent` | GET | 最近 N 个交易日数据 |
-| `/api/analysis/index/{code}/summary` | GET | 指数分析摘要 |
+| `/api/quote/index/{code}/recent` | GET | 最近 N 个交易日数据（日期降序，`limit` 默认 61） |
+| `/api/quote/index/{code}/range` | GET | 指定区间日线（日期升序，`start`/`end` 可选，用于 K 线图） |
+| `/api/quote/coverage` | GET | 各指数数据覆盖度（起止日期、行数） |
+| `/api/analysis/index/{code}/summary` | GET | 单指数分析摘要（MA5/20/60、20/60日涨跌幅、20日波动率、均线排列趋势、MA20 乖离率） |
+| `/api/analysis/index/summaries` | GET | 批量分析摘要（`codes` 以英文逗号分隔，一次返回多个指数） |
 | `/api/report/latest` | GET | 最新每日报告 |
+| `/api/report/daily` | POST | 生成当日分析报告 |
+
+指数代码支持 `000300`、`000300.SH`、`000300SH` 三种写法混输，服务端会自动归一化。
 
 ## 数据库表结构
 

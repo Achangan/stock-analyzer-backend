@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /** 指数分析 REST 接口 */
@@ -30,6 +32,23 @@ public class AnalysisController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(toMap(s));
+    }
+
+    /** 批量指数分析摘要：codes 以英文逗号分隔 */
+    @GetMapping("/index/summaries")
+    public List<Map<String, Object>> summaries(
+            @org.springframework.web.bind.annotation.RequestParam String codes) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (String raw : codes.split(",")) {
+            if (raw.trim().isEmpty()) {
+                continue;
+            }
+            IndexSummary s = analysisService.summary(normalizeCode(raw));
+            if (s != null) {
+                result.add(toMap(s));
+            }
+        }
+        return result;
     }
 
     /** 代码归一化：允许 000300、000300.SH、000300SH 混输 */
@@ -65,6 +84,10 @@ public class AnalysisController {
         m.put("change20d", s.getChange20d());
         m.put("change60d", s.getChange60d());
         m.put("volatility20d", s.getVolatility20d());
+        m.put("ma5OverMa20", s.getMa5OverMa20());
+        m.put("ma20OverMa60", s.getMa20OverMa60());
+        m.put("trend", s.getTrend());
+        m.put("bias20", s.getBias20());
         return m;
     }
 }
